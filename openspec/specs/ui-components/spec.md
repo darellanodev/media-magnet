@@ -1,23 +1,19 @@
-## ADDED Requirements
+## Requirements
 
-### Requirement: Titlebar component displays app identity and controls
-The Titlebar SHALL render a top bar containing macOS-style window dots, the app wordmark with a prompt caret, a tool switch between yt-dlp and ok.ru, and a mode toggle between single and playlist.
+### Requirement: Titlebar component displays app identity and tool controls
+The Titlebar SHALL render a top bar containing macOS-style window dots, the app wordmark with a prompt caret, and a tool switch between yt-dlp and ok.ru.
 
 #### Scenario: Titlebar renders all elements
 - **WHEN** the application loads
-- **THEN** the Titlebar SHALL display three colored dots, the text `›_ media-magnet`, a tool switch with yt-dlp selected by default, and a mode toggle with single selected by default
+- **THEN** the Titlebar SHALL display three colored dots, the text `›_ media-magnet`, and a tool switch with yt-dlp selected by default
 
 #### Scenario: Tool switch toggles between yt-dlp and ok.ru
 - **WHEN** the user clicks the ok.ru tool switch option
 - **THEN** the tool switch SHALL visually highlight ok.ru and the store's `tool` field SHALL update to `'okru'`
 
-#### Scenario: Mode toggle switches between single and playlist
-- **WHEN** the user clicks the playlist mode toggle option
-- **THEN** the mode toggle SHALL visually highlight playlist and the store's `process` field SHALL update to `'playlist'`
-
-#### Scenario: Tool switch and mode toggle are independent
+#### Scenario: Tool switch is independent of other controls
 - **WHEN** the user changes the tool switch
-- **THEN** the mode toggle SHALL remain unchanged, and vice versa
+- **THEN** all other form fields SHALL remain unchanged
 
 ### Requirement: Chip component renders custom selectable flag items
 The Chip component SHALL render a custom styled container with a label, optional flag code, and an animated selection indicator. It SHALL support both radio and checkbox variants.
@@ -43,7 +39,7 @@ The Chip component SHALL render a custom styled container with a label, optional
 - **THEN** it SHALL call its `onChange` callback with the current selection state
 
 ### Requirement: FlagGroup component organizes chips in a grid
-The FlagGroup component SHALL render a titled group containing Chip children in a responsive grid layout.
+The FlagGroup component SHALL render a titled group containing Chip children in a responsive grid layout. It SHALL accept an optional `columns` prop to control the grid.
 
 #### Scenario: FlagGroup renders with title
 - **WHEN** a FlagGroup is created with a `title` prop
@@ -51,26 +47,45 @@ The FlagGroup component SHALL render a titled group containing Chip children in 
 
 #### Scenario: FlagGroup arranges chips in columns
 - **WHEN** a FlagGroup renders with multiple Chip children
-- **THEN** it SHALL display them in a multi-column grid layout
+- **THEN** it SHALL display them in a multi-column grid layout (default: responsive 1-3 columns)
+
+#### Scenario: FlagGroup respects columns prop
+- **WHEN** a FlagGroup is created with `columns={1}`
+- **THEN** it SHALL display chips in a single-column layout
 
 #### Scenario: FlagGroup is responsive
 - **WHEN** the viewport is narrow (mobile)
 - **THEN** the FlagGroup SHALL collapse to a single-column layout
 
-### Requirement: Titlebar mode toggle updates store process field
-The mode toggle in the Titlebar SHALL be two-way bound to the store's `process` field.
+### Requirement: Form sections are arranged in paired rows
+The form SHALL organize related sections into side-by-side paired rows on wider screens.
+
+#### Scenario: Format and mode are paired
+- **WHEN** the form renders on a medium or wider viewport
+- **THEN** the Format section (media type chips) and Mode section (single/playlist chips) SHALL display side by side
+
+#### Scenario: Quality and options are paired
+- **WHEN** the form renders on a medium or wider viewport
+- **THEN** the Quality section and Options section SHALL display side by side
+
+#### Scenario: Pairs stack on mobile
+- **WHEN** the viewport is narrow (mobile)
+- **THEN** each section in a pair SHALL stack vertically
+
+### Requirement: Mode toggle lives in the form
+The process type (single/playlist) SHALL be selectable via chips within the form, not in the Titlebar.
+
+#### Scenario: Mode chips render in the form
+- **WHEN** the application loads
+- **THEN** the form SHALL display Single and Playlist chips bound to the store's `process` field
 
 #### Scenario: Default mode is single
 - **WHEN** the application loads
-- **THEN** the mode toggle SHALL display "single" as selected and the store's `process` field SHALL be `'single'`
+- **THEN** the Single chip SHALL be selected and the store's `process` field SHALL be `'single'`
 
-#### Scenario: Switching to playlist mode
-- **WHEN** the user clicks the playlist option in the mode toggle
+#### Scenario: Switching mode via form chips
+- **WHEN** the user clicks the Playlist chip
 - **THEN** the store's `process` field SHALL update to `'playlist'`
-
-#### Scenario: Switching back to single mode
-- **WHEN** the user clicks the single option in the mode toggle while in playlist mode
-- **THEN** the store's `process` field SHALL update to `'single'`
 
 ### Requirement: Zustand store manages all form state
 The application SHALL use a Zustand store (`useAppStore`) as the single source of truth for all form fields: URL, tool, process type, media type, quality, cookies, and command results.
@@ -91,7 +106,7 @@ Each form input SHALL be two-way bound to the Zustand store via `value` and `onC
 - **THEN** the store's `url` field SHALL update to match the typed text
 
 #### Scenario: User selects process type
-- **WHEN** the user selects a process type via the Titlebar mode toggle
+- **WHEN** the user selects a process type via the form mode chips
 - **THEN** the store's `process` field SHALL update to the selected value
 
 #### Scenario: User selects media type

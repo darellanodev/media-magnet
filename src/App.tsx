@@ -18,6 +18,7 @@ function App() {
     setType,
     setQuality,
     setCookies,
+    setProcess,
     addResult,
   } = useAppStore()
 
@@ -38,63 +39,75 @@ function App() {
       <main className="max-w-4xl mx-auto px-6 py-8">
         <section className="mb-8">
           <h2 className="text-xs uppercase tracking-widest text-accent mb-4 font-semibold">
-            Media type
+            Format & Mode
           </h2>
-          <FlagGroup title="Select output format">
-            <Chip
-              label="Video"
-              variant="radio"
-              selected={type === 'video'}
-              onChange={() => setType('video')}
-            />
-            <Chip
-              label="Audio"
-              variant="radio"
-              selected={type === 'audio'}
-              onChange={() => setType('audio')}
-            />
-          </FlagGroup>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FlagGroup title="Select output format">
+              <Chip
+                label="Video"
+                variant="radio"
+                selected={type === 'video'}
+                onChange={() => setType('video')}
+              />
+              <Chip
+                label="Audio"
+                variant="radio"
+                selected={type === 'audio'}
+                onChange={() => setType('audio')}
+              />
+            </FlagGroup>
+            <FlagGroup title="Select process type">
+              <Chip
+                label="Single"
+                variant="radio"
+                selected={process === 'single'}
+                onChange={() => setProcess('single')}
+              />
+              <Chip
+                label="Playlist"
+                variant="radio"
+                selected={process === 'playlist'}
+                onChange={() => setProcess('playlist')}
+              />
+            </FlagGroup>
+          </div>
         </section>
 
         <section className="mb-8">
           <h2 className="text-xs uppercase tracking-widest text-accent mb-4 font-semibold">
-            Quality
+            Quality & Options
           </h2>
-          <FlagGroup title="Select quality">
-            <Chip
-              label="1080p"
-              variant="radio"
-              selected={quality === '1080'}
-              onChange={() => setQuality('1080')}
-            />
-            <Chip
-              label="720p"
-              variant="radio"
-              selected={quality === '720'}
-              onChange={() => setQuality('720')}
-            />
-            <Chip
-              label="480p"
-              variant="radio"
-              selected={quality === '480'}
-              onChange={() => setQuality('480')}
-            />
-          </FlagGroup>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xs uppercase tracking-widest text-accent mb-4 font-semibold">
-            Options
-          </h2>
-          <FlagGroup title="Additional flags">
-            <Chip
-              label="Cookies from browser"
-              variant="checkbox"
-              selected={cookies}
-              flagCode="cookies"
-              onChange={() => setCookies(!cookies)}
-            />
-          </FlagGroup>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <FlagGroup title="Select quality">
+              <Chip
+                label="1080p"
+                variant="radio"
+                selected={quality === '1080'}
+                onChange={() => setQuality('1080')}
+              />
+              <Chip
+                label="720p"
+                variant="radio"
+                selected={quality === '720'}
+                onChange={() => setQuality('720')}
+              />
+              <Chip
+                label="480p"
+                variant="radio"
+                selected={quality === '480'}
+                onChange={() => setQuality('480')}
+              />
+            </FlagGroup>
+            <FlagGroup title="Additional flags" columns={1}>
+              <Chip
+                label="Cookies from browser"
+                variant="checkbox"
+                selected={cookies}
+                flagCode="cookies"
+                onChange={() => setCookies(!cookies)}
+              />
+            </FlagGroup>
+          </div>
         </section>
 
         <section className="mb-8">
