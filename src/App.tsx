@@ -2,6 +2,9 @@ import { ParamBuilder } from './utils/ParamBuilder'
 import { StringUtils } from './utils/StringUtils'
 import { CommandBuilder } from './utils/CommandBuilder'
 import { useAppStore } from './store/useAppStore'
+import { Titlebar } from './components/Titlebar'
+import { Chip } from './components/Chip'
+import { FlagGroup } from './components/FlagGroup'
 
 function App() {
   const {
@@ -12,7 +15,6 @@ function App() {
     cookies,
     results,
     setUrl,
-    setProcess,
     setType,
     setQuality,
     setCookies,
@@ -30,161 +32,108 @@ function App() {
   }
 
   return (
-    <div className="p-4 bg-brand-canvas text-brand-ink">
-      <h4 className="text-eyebrow uppercase tracking-[2.52px] text-brand-primary mb-4 font-sans">
-        Select the type of process
-      </h4>
-      <div className="border-b border-hairline mb-4" />
-      <div className="flex flex-center justify-center">
-        <fieldset className="bg-brand-canvas border border-hairline rounded-card w-full p-6 mb-4 flex flex-center justify-center gap-4">
-          <div>
-            <input
-              type="radio"
-              id="single"
-              name="process"
-              value="single"
-              checked={process === 'single'}
-              onChange={() => setProcess('single')}
-            />
-            <label htmlFor="single" className="ml-2">
-              Single
-            </label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="playlist"
-              name="process"
-              value="playlist"
-              checked={process === 'playlist'}
-              onChange={() => setProcess('playlist')}
-            />
-            <label htmlFor="playlist" className="ml-2">
-              Playlist
-            </label>
-          </div>
-        </fieldset>
-      </div>
+    <div className="min-h-screen bg-surface text-text-primary font-mono">
+      <Titlebar />
 
-      <h4 className="text-eyebrow uppercase tracking-[2.52px] text-brand-primary mb-4 font-sans">
-        Configure the parameters
-      </h4>
-      <div className="border-b border-hairline mb-4" />
-      <div className="flex gap-4">
-        <fieldset className="bg-brand-canvas border border-hairline rounded-card w-1/3 p-6">
-          <legend className="font-sans font-semibold text-brand-ink pl-2 pr-2">
+      <main className="max-w-4xl mx-auto px-6 py-8">
+        <section className="mb-8">
+          <h2 className="text-xs uppercase tracking-widest text-accent mb-4 font-semibold">
             Media type
-          </legend>
-          <input
-            type="radio"
-            id="video"
-            name="type"
-            value="video"
-            checked={type === 'video'}
-            onChange={() => setType('video')}
-          />
-          <label htmlFor="video" className="ml-2">
-            Video
-          </label>
-          <br />
-          <input
-            type="radio"
-            id="audio"
-            name="type"
-            value="audio"
-            checked={type === 'audio'}
-            onChange={() => setType('audio')}
-          />
-          <label htmlFor="audio" className="ml-2">
-            Audio
-          </label>
-        </fieldset>
-        <fieldset className="bg-brand-canvas border border-hairline rounded-card w-1/3 p-6">
-          <legend className="font-sans font-semibold text-brand-ink pl-2 pr-2">Quality</legend>
-          <input
-            type="radio"
-            id="q1080"
-            name="quality"
-            value="1080"
-            checked={quality === '1080'}
-            onChange={() => setQuality('1080')}
-          />
-          <label htmlFor="q1080" className="ml-2">
-            1080p
-          </label>
-          <br />
-          <input
-            type="radio"
-            id="q720"
-            name="quality"
-            value="720"
-            checked={quality === '720'}
-            onChange={() => setQuality('720')}
-          />
-          <label htmlFor="q720" className="ml-2">
-            720p
-          </label>
-          <br />
-          <input
-            type="radio"
-            id="q480"
-            name="quality"
-            value="480"
-            checked={quality === '480'}
-            onChange={() => setQuality('480')}
-          />
-          <label htmlFor="q480" className="ml-2">
-            480p
-          </label>
-        </fieldset>
-        <fieldset className="bg-brand-canvas border border-hairline rounded-card w-1/3 p-6">
-          <legend className="font-sans font-semibold text-brand-ink pl-2 pr-2">
-            Options
-          </legend>
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="cookies"
-              checked={cookies}
-              onChange={(e) => setCookies(e.target.checked)}
+          </h2>
+          <FlagGroup title="Select output format">
+            <Chip
+              label="Video"
+              variant="radio"
+              selected={type === 'video'}
+              onChange={() => setType('video')}
             />
-            <label htmlFor="cookies" className="ml-2">
-              Cookies from browser
-            </label>
-          </div>
-        </fieldset>
-      </div>
+            <Chip
+              label="Audio"
+              variant="radio"
+              selected={type === 'audio'}
+              onChange={() => setType('audio')}
+            />
+          </FlagGroup>
+        </section>
 
-      <h4 className="text-eyebrow uppercase tracking-[2.52px] text-brand-primary mt-8 mb-4 font-sans">
-        Insert the URL
-      </h4>
-      <div className="border-b border-hairline mb-4" />
-      <input
-        type="text"
-        id="url"
-        className="w-full px-4 py-3 bg-brand-canvas-soft border border-hairline rounded-button text-brand-ink font-body-sm"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
-      <button
-        id="saveButton"
-        onClick={handleClick}
-        className="bg-brand-primary text-brand-on-primary hover:opacity-90 font-button-md py-3 px-4 rounded-button mt-4">
-        Add it
-      </button>
-      <br />
-      <h4 className="text-eyebrow uppercase tracking-[2.52px] text-brand-primary mt-8 mb-4 font-sans">
-        Result of the commands to execute in yt-dlp
-      </h4>
-      <div className="border-b border-hairline mb-4" />
-      <textarea
-        id="Results"
-        rows={5}
-        cols={50}
-        className="w-full px-4 py-3 bg-brand-canvas-soft border border-hairline rounded-card font-mono text-brand-ink min-h-[120px]"
-        value={results}
-        readOnly
-      />
+        <section className="mb-8">
+          <h2 className="text-xs uppercase tracking-widest text-accent mb-4 font-semibold">
+            Quality
+          </h2>
+          <FlagGroup title="Select quality">
+            <Chip
+              label="1080p"
+              variant="radio"
+              selected={quality === '1080'}
+              onChange={() => setQuality('1080')}
+            />
+            <Chip
+              label="720p"
+              variant="radio"
+              selected={quality === '720'}
+              onChange={() => setQuality('720')}
+            />
+            <Chip
+              label="480p"
+              variant="radio"
+              selected={quality === '480'}
+              onChange={() => setQuality('480')}
+            />
+          </FlagGroup>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-xs uppercase tracking-widest text-accent mb-4 font-semibold">
+            Options
+          </h2>
+          <FlagGroup title="Additional flags">
+            <Chip
+              label="Cookies from browser"
+              variant="checkbox"
+              selected={cookies}
+              flagCode="cookies"
+              onChange={() => setCookies(!cookies)}
+            />
+          </FlagGroup>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-xs uppercase tracking-widest text-accent mb-4 font-semibold">
+            URL
+          </h2>
+          <div className="flex items-center bg-surface-alt border border-surface-border rounded-lg px-4 py-3 focus-within:border-accent transition-colors">
+            <span className="text-accent mr-2 text-lg">$</span>
+            <input
+              type="text"
+              id="url"
+              className="flex-1 bg-transparent outline-none text-text-primary placeholder:text-text-secondary font-mono"
+              placeholder="https://..."
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+          </div>
+          <button
+            id="saveButton"
+            onClick={handleClick}
+            className="mt-4 bg-accent hover:bg-accent-hover text-surface font-semibold py-3 px-6 rounded-lg transition-colors w-full"
+          >
+            Generate Command
+          </button>
+        </section>
+
+        <section>
+          <h2 className="text-xs uppercase tracking-widest text-accent mb-4 font-semibold">
+            Output
+          </h2>
+          <textarea
+            id="Results"
+            rows={6}
+            className="w-full px-4 py-3 bg-surface border border-surface-border rounded-lg font-mono text-text-primary text-sm min-h-[140px] resize-none outline-none"
+            value={results}
+            readOnly
+          />
+        </section>
+      </main>
     </div>
   )
 }

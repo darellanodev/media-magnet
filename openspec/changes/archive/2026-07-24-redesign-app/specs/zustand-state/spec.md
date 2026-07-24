@@ -1,4 +1,4 @@
-## ADDED Requirements
+## MODIFIED Requirements
 
 ### Requirement: Zustand store manages all form state
 The application SHALL use a Zustand store (`useAppStore`) as the single source of truth for all form fields: URL, tool, process type, media type, quality, cookies, and command results.

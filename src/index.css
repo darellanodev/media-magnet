@@ -4,11 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-brand-canvas text-brand-ink font-sans antialiased;
+    @apply bg-surface text-text-primary font-sans antialiased;
   }
 
   input[type="radio"] {
-    accent-color: #00d992;
+    accent-color: #20C997;
     width: 16px;
     height: 16px;
   }
@@ -18,11 +18,11 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #101010;
+    background: #0C0C0C;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #3d3a39;
+    background: #2A2A2A;
     border-radius: 4px;
   }
 }

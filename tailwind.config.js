@@ -4,22 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brand-primary': '#00d992',
-        'brand-primary-soft': '#2fd6a1',
-        'brand-primary-deep': '#10b981',
-        'brand-on-primary': '#101010',
-        'brand-canvas': '#101010',
-        'brand-canvas-soft': '#1a1a1a',
-        'brand-ink': '#f2f2f2',
-        'brand-ink-strong': '#ffffff',
-        'brand-body': '#bdbdbd',
-        'brand-mute': '#8b949e',
-        'brand-hairline': '#3d3a39',
-        'brand-hairline-soft': '#b8b3b0',
+        surface: '#0C0C0C',
+        'surface-alt': '#141414',
+        'surface-raised': '#1C1C1C',
+        'surface-border': '#2A2A2A',
+        'text-primary': '#E0E0E0',
+        'text-secondary': '#9A9A9A',
+        accent: '#20C997',
+        'accent-hover': '#1DB954',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        mono: ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'monospace'],
+        sans: ['JetBrains Mono', 'monospace'],
       },
       fontSize: {
         'display-xl': ['60px', { lineHeight: '60px', fontWeight: '400', letterSpacing: '-0.65px' }],
