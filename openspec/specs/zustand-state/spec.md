@@ -1,11 +1,11 @@
 ## ADDED Requirements
 
 ### Requirement: Zustand store manages all form state
-The application SHALL use a Zustand store (`useAppStore`) as the single source of truth for all form fields: URL, tool, process type, media type, quality, cookies, and command results.
+The application SHALL use a Zustand store (`useAppStore`) as the single source of truth for all form fields. The store SHALL include both yt-dlp fields (URL, tool, process type, media type, quality, cookies, command results) and ok.ru fields (external tool, ok.ru URL, ok.ru results).
 
 #### Scenario: Store initializes with default values
 - **WHEN** the application loads
-- **THEN** the store SHALL have `url` as empty string, `tool` as `'ytdlp'`, `process` as `'single'`, `type` as `'video'`, `quality` as `'1080'`, `cookies` as `false`, and `results` as empty string
+- **THEN** the store SHALL have `url` as empty string, `tool` as `'ytdlp'`, `process` as `'single'`, `type` as `'video'`, `quality` as `'1080'`, `cookies` as `false`, `results` as empty string, `externalTool` as `'saveclips.org'`, `okruUrl` as empty string, and `okruResults` as empty string
 
 #### Scenario: Tool field updates
 - **WHEN** the user selects a different tool in the Titlebar
