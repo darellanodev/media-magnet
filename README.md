@@ -1,5 +1,7 @@
 # media-magnet
 
+![media magnet banner](https://github.com/darellanodev/media-magnet/blob/main/img_github_readme/banner.png?raw=true)
+
 A multi-tool GUI for video and audio downloads for learning purposes.
 
 ## THIS APPLICATION IS IN AN EARLY STAGE OF DEVELOPMENT
