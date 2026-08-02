@@ -1,7 +1,8 @@
-import { useAppStore } from '../store/useAppStore';
+import { useAppStore } from '../store/useAppStore'
+import logo from '../assets/media-magnet-logo-small.png'
 
 export function Titlebar() {
-  const { tool, setTool } = useAppStore();
+  const { tool, setTool } = useAppStore()
 
   return (
     <header className="flex items-center justify-between px-4 py-3 border-b border-surface-border bg-surface-alt">
@@ -11,9 +12,7 @@ export function Titlebar() {
           <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
           <span className="w-3 h-3 rounded-full bg-green-500/80" />
         </div>
-        <span className="text-text-primary font-mono text-sm">
-          <span className="text-accent">›_</span> media-magnet
-        </span>
+        <img src={logo} alt="media-magnet" className="h-12 w-auto" />
       </div>
 
       <div className="flex items-center gap-4">
@@ -25,8 +24,7 @@ export function Titlebar() {
               tool === 'ytdlp'
                 ? 'bg-accent/15 text-accent'
                 : 'text-text-secondary hover:text-text-primary'
-            }`}
-          >
+            }`}>
             yt-dlp
           </button>
           <button
@@ -36,12 +34,11 @@ export function Titlebar() {
               tool === 'okru'
                 ? 'bg-accent/15 text-accent'
                 : 'text-text-secondary hover:text-text-primary'
-            }`}
-          >
+            }`}>
             ok.ru
           </button>
         </div>
       </div>
     </header>
-  );
+  )
 }
