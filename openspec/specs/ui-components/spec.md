@@ -120,3 +120,18 @@ Each form input SHALL be two-way bound to the Zustand store via `value` and `onC
 #### Scenario: User toggles cookies checkbox
 - **WHEN** the user clicks the cookies chip
 - **THEN** the store's `cookies` field SHALL update to the checkbox's checked state
+
+### Requirement: yt-dlp form shows latest release link
+The yt-dlp form SHALL render a footnote link below the Output section that points to `https://github.com/yt-dlp/yt-dlp/releases/latest` so users can download the latest yt-dlp release.
+
+#### Scenario: Link renders below the Output section
+- **WHEN** the yt-dlp view renders
+- **THEN** it SHALL display a footnote containing a link to `https://github.com/yt-dlp/yt-dlp/releases/latest` positioned after the Output section
+
+#### Scenario: Link opens in a new tab
+- **WHEN** the user clicks the release link
+- **THEN** the link SHALL open in a new browser tab via `target="_blank"` with `rel="noopener noreferrer"`
+
+#### Scenario: Link text is visible
+- **WHEN** the yt-dlp view renders
+- **THEN** the footnote SHALL display the text `Download the latest yt-dlp release`

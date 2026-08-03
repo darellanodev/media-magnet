@@ -142,6 +142,18 @@ export function YtdlpView() {
           readOnly
         />
       </section>
+
+      <p className="text-center text-xs mt-4 text-text-secondary">
+        Download the latest{' '}
+        <a
+          href="https://github.com/yt-dlp/yt-dlp/releases/latest"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-accent hover:underline"
+        >
+          yt-dlp release
+        </a>
+      </p>
     </>
   )
 }
