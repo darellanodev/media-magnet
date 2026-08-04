@@ -2,6 +2,7 @@ import { useAppStore } from './store/useAppStore'
 import { Titlebar } from './components/Titlebar'
 import { YtdlpView } from './components/YtdlpView'
 import { OkRuView } from './components/OkRuView'
+import { Footer } from './components/Footer'
 
 function App() {
   const tool = useAppStore((s) => s.tool)
@@ -13,6 +14,8 @@ function App() {
       <main className="max-w-4xl mx-auto px-6 py-8">
         {tool === 'okru' ? <OkRuView /> : <YtdlpView />}
       </main>
+
+      <Footer />
     </div>
   )
 }
