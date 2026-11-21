@@ -1,6 +1,4 @@
 import { useAppStore } from '../store/useAppStore'
-import { Chip } from './Chip'
-import { FlagGroup } from './FlagGroup'
 
 export function OkRuView() {
   const {
@@ -21,17 +19,9 @@ export function OkRuView() {
   return (
     <>
       <section className="mb-8">
-        <h2 className="text-xs uppercase tracking-widest text-accent mb-4 font-semibold">
-          External Web Tools
-        </h2>
-        <FlagGroup title="Select external tool">
-          <Chip
-            label="saveclips.org"
-            variant="radio"
-            selected={true}
-            onChange={() => {}}
-          />
-        </FlagGroup>
+        <p className="text-xs font-mono text-text-secondary">
+          Uses saveclips.org to generate download links.
+        </p>
       </section>
 
       <section className="mb-8">
@@ -66,6 +56,9 @@ export function OkRuView() {
           value={okruResults}
           readOnly
         />
+        <p className="mt-3 text-xs font-mono text-text-secondary">
+          The author has no affiliation with this external website.
+        </p>
       </section>
     </>
   )

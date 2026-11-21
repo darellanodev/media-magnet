@@ -37,6 +37,16 @@ export function Titlebar() {
             }`}>
             ok.ru
           </button>
+          <button
+            type="button"
+            onClick={() => setTool('extras')}
+            className={`px-2 py-1 text-xs font-mono rounded transition-colors ${
+              tool === 'extras'
+                ? 'bg-accent/15 text-accent'
+                : 'text-text-secondary hover:text-text-primary'
+            }`}>
+            Extras
+          </button>
         </div>
       </div>
     </header>

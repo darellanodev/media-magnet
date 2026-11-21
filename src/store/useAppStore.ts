@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 interface AppState {
   url: string
-  tool: 'ytdlp' | 'okru'
+  tool: 'ytdlp' | 'okru' | 'extras'
   process: 'single' | 'playlist'
   type: 'video' | 'audio'
   quality: '1080' | '720' | '480'
@@ -12,7 +12,7 @@ interface AppState {
   okruUrl: string
   okruResults: string
   setUrl: (url: string) => void
-  setTool: (tool: 'ytdlp' | 'okru') => void
+  setTool: (tool: 'ytdlp' | 'okru' | 'extras') => void
   setProcess: (process: 'single' | 'playlist') => void
   setType: (type: 'video' | 'audio') => void
   setQuality: (quality: '1080' | '720' | '480') => void
